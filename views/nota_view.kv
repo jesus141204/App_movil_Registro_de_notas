@@ -1,0 +1,55 @@
+<NotasScreen>:
+    name: "pantalla_notas"
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDTopAppBar:
+            title: "Sistema Registro de notas"
+            elevation: 4
+            pos_hint: {"top": 1}
+            # Llama a la función del controlador al hacer clic
+            right_action_items: [["logout", lambda x: root.logout()]]
+
+        MDBottomNavigation:
+            #  PESTAÑA 1: GESTIÓN DE NOTAS 
+            MDBottomNavigationItem:
+                name: "nav_notas"
+                text: "Notas"
+                icon: "notebook"  # Ícono de libreta de calificaciones
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: "16dp"
+                    spacing: "16dp"
+
+                    MDLabel:
+                        text: "Registro de Calificaciones"
+                        font_style: "H5"
+                        bold: True
+                        adaptive_height: True
+
+                    # Espacio para tu lista o tabla de notas
+                    ScrollView:
+                        MDList:
+                            id: lista_notas
+                            MDLabel:
+                                text: "Aquí aparecerá el control de notas..."
+                                halign: "center"
+                                theme_text_color: "Secondary"
+
+            #  PESTAÑA 2: ESTUDIANTES 
+            MDBottomNavigationItem:
+                name: "nav_estudiantes"
+                text: "Alumnos"
+                icon: "account-multiple"  
+
+                StudentView:
+
+            #  PESTAÑA 3: MATERIAS 
+            MDBottomNavigationItem:
+                name: "nav_materias"
+                text: "Materias"
+                icon: "book-open-variant"  # Ícono de libro abierto
+
+                MateriaView:

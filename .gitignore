@@ -1,0 +1,16 @@
+# Entorno virtual (Evita subir carpetas gigantes)
+venv/
+.venv/
+env/
+
+# Caché de Python
+__pycache__/
+*.pyc
+
+# Base de datos local (Para que no subas tus notas de prueba)
+*.db
+*.sqlite3
+
+# Archivos ocultos del sistema o de Kivy
+.kivy/
+.DS_Store

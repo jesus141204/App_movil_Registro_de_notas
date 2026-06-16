@@ -1,0 +1,40 @@
+<LoginScreen>:
+    md_bg_color: app.theme_cls.bg_normal
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: "24dp"
+        spacing: "16dp"
+        adaptive_height: True
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        MDLabel:
+            text: "¡Bienvenido al registro de notas!"
+            halign: "center"
+            font_style: "H5"  
+            bold: True
+
+        MDTextField:
+            id: txt_usuario
+            hint_text: "Usuario o Correo"
+            icon_right: "account"
+            mode: "rectangle"  
+
+        MDTextField:
+            id: txt_password
+            hint_text: "Contraseña"
+            icon_right: "eye-off"
+            password: True
+            mode: "rectangle"
+
+        MDLabel:
+            id: lbl_error
+            text: ""
+            halign: "center"
+            theme_text_color: "Error"
+            font_style: "Body1"
+
+        MDFillRoundFlatButton:
+            text: "Iniciar Sesión"
+            pos_hint: {"center_x": 0.5}
+            on_release: root.verificar_credenciales(txt_usuario.text, txt_password.text)

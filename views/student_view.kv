@@ -1,0 +1,43 @@
+<StudentView>:
+    orientation: 'vertical'
+    padding: "16dp"
+    spacing: "16dp"
+
+    MDLabel:
+        text: "Gestión de Estudiantes"
+        font_style: "H5"
+        bold: True
+        adaptive_height: True
+
+    # Formulario con campos de texto (Nombre, Apellido y Cédula)
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: "12dp"
+        adaptive_height: True
+
+        MDTextField:
+            id: input_nombre
+            hint_text: "Nombre Completo del Estudiante"
+            mode: "rectangle"
+            
+        MDTextField:
+            id: input_apellido
+            hint_text: "Apellido Completo del Estudiante"
+            mode: "rectangle"
+
+        MDTextField:
+            id: input_cedula
+            hint_text: "Cédula o DNI"
+            mode: "rectangle"
+
+        MDRaisedButton:
+            id: id_boton_registrar_estudiante
+            text: "Registrar Estudiante"
+            pos_hint: {"center_x": .5}
+            # Enviamos todos los textos al controlador al liberar el clic
+            on_release: root.agregar_estudiante(input_nombre.text, input_apellido.text, input_cedula.text)
+
+    # Lista con Scroll para ver los alumnos inscritos
+    ScrollView:
+        MDList:
+            id: lista_estudiantes

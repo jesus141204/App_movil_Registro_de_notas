@@ -1,0 +1,32 @@
+<MateriaView>:
+    orientation: 'vertical'
+    padding: "16dp"
+    spacing: "16dp"
+
+    MDLabel:
+        text: "Gestión de Materias / Asignaturas"
+        font_style: "H5"
+        bold: True
+        adaptive_height: True
+
+    # Formulario de Registro
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: "12dp"
+        adaptive_height: True
+
+        MDTextField:
+            id: input_nombre_materia
+            hint_text: "Nombre de la Materia (Ej: Matemática I)"
+            mode: "rectangle"
+
+        MDRaisedButton:
+            id: id_boton_registrar_materia
+            text: "Registrar Materia"
+            pos_hint: {"center_x": .5}
+            on_release: root.agregar_materia(input_nombre_materia.text)
+
+    # Contenedor con Scroll para el listado de las materias registradas
+    ScrollView:
+        MDList:
+            id: lista_materias
