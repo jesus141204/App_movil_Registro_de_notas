@@ -4,24 +4,26 @@
     MDBoxLayout:
         orientation: 'vertical'
 
-        MDTopAppBar:
-            title: "Sistema Registro de notas"
-            elevation: 4
-            pos_hint: {"top": 1}
-            # Llama a la función del controlador al hacer clic
-            right_action_items: [["logout", lambda x: root.logout()]]
-
         MDBottomNavigation:
             #  PESTAÑA 1: GESTIÓN DE NOTAS 
             MDBottomNavigationItem:
                 name: "nav_notas"
                 text: "Notas"
-                icon: "notebook"  # Ícono de libreta de calificaciones
+                icon: "notebook" 
 
                 MDBoxLayout:
                     orientation: 'vertical'
                     padding: "16dp"
                     spacing: "16dp"
+                
+                    MDTopAppBar:
+                        title: ""
+                        elevation: 4
+                        pos_hint: {"top": 1}
+                        # Botón "+" a la izquierda para ir a registrar calificaciones
+                        left_action_items: [["plus", lambda x: root.ir_a_registrar()]]
+                        # Llama a la función del controlador al hacer clic
+                        right_action_items: [["logout", lambda x: root.logout()]]
 
                     MDLabel:
                         text: "Registro de Calificaciones"
@@ -33,16 +35,19 @@
                     ScrollView:
                         MDList:
                             id: lista_notas
-                            MDLabel:
-                                text: "Aquí aparecerá el control de notas..."
-                                halign: "center"
-                                theme_text_color: "Secondary"
 
             #  PESTAÑA 2: ESTUDIANTES 
             MDBottomNavigationItem:
                 name: "nav_estudiantes"
-                text: "Alumnos"
+                text: "Estudiantes"
                 icon: "account-multiple"  
+            
+                MDTopAppBar:
+                    title: ""
+                    elevation: 4
+                    pos_hint: {"top": 1}
+                    # Llama a la función del controlador al hacer clic
+                    right_action_items: [["logout", lambda x: root.logout()]]
 
                 StudentView:
 
@@ -50,6 +55,123 @@
             MDBottomNavigationItem:
                 name: "nav_materias"
                 text: "Materias"
-                icon: "book-open-variant"  # Ícono de libro abierto
+                icon: "book-open-variant"
+            
+                MDTopAppBar:
+                    title: ""
+                    elevation: 4
+                    pos_hint: {"top": 1}
+                    # Llama a la función del controlador al hacer clic
+                    right_action_items: [["logout", lambda x: root.logout()]]
 
                 MateriaView:
+#Las vistas para registrar notas
+<RegistrarNotaScreen>:
+    name: "pantalla_registrar_nota"
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDTopAppBar:
+            title: "Registrar Calificaciones"
+            elevation: 4
+            left_action_items: [["arrow-left", lambda x: root.regresar()]]
+
+        ScrollView:
+            MDBoxLayout:
+                orientation: 'vertical'
+                padding: "24dp"
+                spacing: "20dp"
+                adaptive_height: True
+
+                MDLabel:
+                    text: "Formulario Multicarga de Notas"
+                    font_style: "H6"
+                    bold: True
+
+                # Botón Desplegable para Estudiantes
+                MDRaisedButton:
+                    id: btn_estudiante
+                    text: "Seleccionar Estudiante"
+                    pos_hint: {"center_x": .5}
+                    size_hint_x: 1
+                    on_release: root.abrir_menu_estudiantes(self)
+
+                # Botón Desplegable para Materias
+                MDRaisedButton:
+                    id: btn_materia
+                    text: "Seleccionar Materia"
+                    pos_hint: {"center_x": .5}
+                    size_hint_x: 1
+                    on_release: root.abrir_menu_materias(self)
+
+                # 📥 CONTENEDOR DINÁMICO (Esto es lo que Python no encontraba)
+                MDBoxLayout:
+                    id: contenedor_inputs
+                    orientation: 'vertical'
+                    spacing: "12dp"
+                    adaptive_height: True
+
+                # ➕ BOTÓN PARA AGREGAR FILA (Python también lo necesita para ocultarlo/mostrarlo)
+                MDRoundFlatIconButton:
+                    id: btn_agregar_fila
+                    text: "Añadir otra evaluación"
+                    icon: "plus"
+                    pos_hint: {"center_x": .5}
+                    opacity: 0         
+                    disabled: True     
+                    on_release: root.agregar_fila_formulario()
+
+                MDRaisedButton:
+                    text: "Guardar Todas las Calificaciones"
+                    pos_hint: {"center_x": .5}
+                    size_hint_x: 0.8
+                    md_bg_color: 0.7, 0.1, 0.1, 1  
+                    on_release: root.guardar_todas_las_notas()
+
+<DetalleNotaScreen>:
+    name: "pantalla_detalle_nota"
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDTopAppBar:
+            title: "Editar Calificaciones"
+            elevation: 4
+            left_action_items: [["arrow-left", lambda x: root.regresar()]]
+
+        ScrollView:
+            MDBoxLayout:
+                orientation: 'vertical'
+                padding: "24dp"
+                spacing: "20dp"
+                adaptive_height: True
+
+                # Datos informativos del expediente a editar
+                MDLabel:
+                    id: lbl_alumno
+                    text: "Estudiante: "
+                    font_style: "H6"
+                    bold: True
+
+                MDLabel:
+                    id: lbl_materia
+                    text: "Materia: "
+                    font_style: "Subtitle1"
+
+                MDSeparator:
+
+                # 📥 Aquí adentro se dibujarán los TextFields con las notas que ya existen
+                MDBoxLayout:
+                    id: contenedor_edicion
+                    orientation: 'vertical'
+                    spacing: "16dp"
+                    adaptive_height: True
+
+                # Botón para confirmar los cambios
+                MDRaisedButton:
+                    text: "Guardar Cambios"
+                    pos_hint: {"center_x": .5}
+                    size_hint_x: 0.8
+                    md_bg_color: 0.2, 0.6, 0.2, 1  # Verde para denotar éxito/guardado
+                    on_release: root.actualizar_calificaciones()                

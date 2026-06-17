@@ -228,13 +228,67 @@ class notaModel():
         id_notas=self.__db.ejecutar_consulta(query_insert,input_nota)
         return id_notas
         
-    
-    def update_notas(self,id,name):
+    def update_notas(self,id,name,fecha):
         updates_materia=(name,id)
-        update_query="  UPDATE notas SET  name=? where id=? "
+        update_query="  UPDATE notas SET nota=?,fecha_evaluacion=? where id=? "
         self.__db.ejecutar_consulta(update_query,updates_materia)
         
     def delete_notas(self,id):
         delete_query=(''' DELETE FROM notas where id = ?;  ''')
         self.__db.ejecutar_consulta(delete_query,(id,))
         print("notas eliminada satisfactoriamente")
+    
+    def contar_notas_estudiante(self, id_estudiante, codigo_materia):
+        query = """
+            SELECT COUNT(*) FROM notas 
+            WHERE id_estudiante = ? AND codigo_materia = ?
+        """
+        resultado = self.__db.ejecutar_consulta(query, (id_estudiante, codigo_materia))
+        
+        if resultado:
+            primera_fila = resultado[0]
+            total_notas = primera_fila[0]
+            return total_notas
+    
+        return 0
+
+    def consultar_notas_con_nombres(self):
+        """Trae las calificaciones asociando los nombres reales de estudiantes y materias"""
+        # NOTA: Ajusta los nombres de las tablas/columnas ('estudiantes', 'materias', 'nombre') 
+        query = """
+            SELECT p.nombre, m.name, n.nota, n.id_estudiante, n.codigo_materia 
+            FROM notas n
+            JOIN estudiante e ON n.id_estudiante = e.id
+            JOIN materia m ON n.codigo_materia = m.codigo_materia
+            JOIN persona p ON e.id_persona = p.id
+        """
+        return self.__db.ejecutar_consulta(query)
+
+    def delete_bloque_notas(self, id_estudiante, codigo_materia):
+        """Elimina todas las notas que pertenecen a un estudiante en una materia específica"""
+        delete_query = """
+            DELETE FROM notas 
+            WHERE id_estudiante = ? AND codigo_materia = ?;
+        """
+        self.__db.ejecutar_consulta(delete_query, (id_estudiante, codigo_materia))
+        print(f"Bloque de notas eliminado satisfactoriamente para Alumno: {id_estudiante}")
+    
+    def consultar_notas_especificas(self, id_estudiante, codigo_materia):
+        """Trae las notas detalladas de un solo estudiante en una sola materia"""
+        query = """
+            SELECT n.id, p.nombre, m.name, n.nota, n.fecha_evaluacion
+            FROM notas n
+            JOIN estudiante e ON n.id_estudiante = e.id
+            JOIN materia m ON n.codigo_materia = m.codigo_materia
+            JOIN persona p ON e.id_persona = p.id
+            WHERE n.id_estudiante = ? AND n.codigo_materia = ?
+        """
+        return self.__db.ejecutar_consulta(query, (id_estudiante, codigo_materia))
+        
+"""
+con=ConnectionModel()
+user=UserModel(con)
+p=PersonaModel(con)
+p.registrar_persona(3145642,"Jesus","Marin")
+user.register_user("ale14","141204.j",1,True)
+"""

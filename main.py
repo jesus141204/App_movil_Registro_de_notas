@@ -4,7 +4,7 @@ from kivy.uix.screenmanager import ScreenManager
 
 # Importación de controladores
 from controller.login_controller import LoginScreen
-from controller.nota_controller import NotasScreen
+from controller.nota_controller import NotasScreen,DetalleNotaScreen,RegistrarNotaScreen
 # Nota: Como StudentView es un MDBoxLayout, asegúrate de cómo lo integras en tus pantallas
 from controller.student_controller import StudentView 
 from controller.materia_controller import MateriaView
@@ -41,6 +41,10 @@ class LoginApp(MDApp):
         # Agregamos las pantallas principales
         sm.add_widget(LoginScreen(name="pantalla_login"))
         sm.add_widget(NotasScreen(name="pantalla_notas"))
+        
+        # 🌟 Agregamos las dos pantallas del nuevo flujo
+        sm.add_widget(RegistrarNotaScreen(name="pantalla_registrar_nota"))
+        sm.add_widget(DetalleNotaScreen(name="pantalla_detalle_nota"))
         
         return sm
     
