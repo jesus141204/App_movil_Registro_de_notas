@@ -229,7 +229,7 @@ class notaModel():
         return id_notas
         
     def update_notas(self,id,name,fecha):
-        updates_materia=(name,id)
+        updates_materia=(name,fecha,id)
         update_query="  UPDATE notas SET nota=?,fecha_evaluacion=? where id=? "
         self.__db.ejecutar_consulta(update_query,updates_materia)
         
