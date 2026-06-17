@@ -284,11 +284,11 @@ class notaModel():
             WHERE n.id_estudiante = ? AND n.codigo_materia = ?
         """
         return self.__db.ejecutar_consulta(query, (id_estudiante, codigo_materia))
+    
+    # Agrega esto dentro de tu clase de notas en models/model.py
+
+    def eliminar_nota_individual(self, id_nota):
+        """Borra una única calificación de la base de datos por su ID"""
+        query = "DELETE FROM notas WHERE id = ?"
+        self.__db.ejecutar_consulta(query, (id_nota,))
         
-"""
-con=ConnectionModel()
-user=UserModel(con)
-p=PersonaModel(con)
-p.registrar_persona(3145642,"Jesus","Marin")
-user.register_user("ale14","141204.j",1,True)
-"""
