@@ -1,6 +1,7 @@
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.textfield import MDTextField
+from kivymd.uix.menu import MDDropdownMenu
 from kivymd.app import MDApp
 
 class RegistrarNotaScreen(Screen):
