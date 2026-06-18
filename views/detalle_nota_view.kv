@@ -1,0 +1,86 @@
+<DetalleNotaScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        md_bg_color: 0.1, 0.1, 0.1, 1 
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: "65dp"
+            md_bg_color: 0.9, 0.25, 0.22, 1 
+            padding: "8dp"
+            spacing: "12dp"
+            valign: "middle"
+
+            MDIconButton:
+                icon: "arrow-left"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                pos_hint: {"center_y": .5}
+                on_release: root.regresar()
+
+            MDLabel:
+                text: "Resumen Académico Detallado"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                font_style: "H6"
+                pos_hint: {"center_y": .5}
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: "110dp" # Le damos una altura fija para albergar los 3 labels espaciados
+            padding: ["20dp", "12dp", "20dp", "12dp"]
+            spacing: "6dp" # Separación entre cada texto
+
+            MDLabel:
+                id: lbl_alumno
+                text: "Estudiante: Cargando..."
+                font_style: "H6"
+                bold: True
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+
+            MDLabel:
+                id: lbl_materia
+                text: "Materia: Cargando..."
+                font_style: "Subtitle1"
+                theme_text_color: "Custom"
+                text_color: 0.7, 0.7, 0.7, 1
+
+            MDLabel:
+                id: lbl_docente
+                text: "Docente: Cargando..."
+                font_style: "Caption"
+                theme_text_color: "Custom"
+                text_color: 0.5, 0.5, 0.5, 1
+
+        MDSeparator:
+            color: 0.2, 0.2, 0.2, 1
+
+        ScrollView:
+            do_scroll_x: False
+            padding: ["10dp", "0dp", "10dp", "0dp"]
+
+            MDBoxLayout:
+                id: contenedor_notas_simples
+                orientation: 'vertical'
+                adaptive_height: True
+                spacing: "8dp"
+
+        MDSeparator:
+            color: 0.2, 0.2, 0.2, 1
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: "60dp"
+            padding: "16dp"
+            gravity: "center"
+
+            MDLabel:
+                id: lbl_promedio
+                text: "PROMEDIO GENERAL: 0.0 PTS"
+                halign: "center"
+                bold: True
+                font_style: "Subtitle1"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1

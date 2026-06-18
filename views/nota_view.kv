@@ -5,10 +5,11 @@
         orientation: 'vertical'
 
         MDBottomNavigation:
-            #  PESTAÑA 1: GESTIÓN DE NOTAS 
+
             MDBottomNavigationItem:
                 name: "nav_notas"
                 text: "Notas"
+<<<<<<< Updated upstream
                 icon: "notebook" 
 
                 MDBoxLayout:
@@ -24,22 +25,38 @@
                         left_action_items: [["plus", lambda x: root.ir_a_registrar()]]
                         # Llama a la función del controlador al hacer clic
                         right_action_items: [["logout", lambda x: root.logout()]]
+=======
+                icon: "notebook"
 
-                    MDLabel:
-                        text: "Registro de Calificaciones"
-                        font_style: "H5"
-                        bold: True
-                        adaptive_height: True
+                MDBoxLayout:
+                    orientation: 'vertical'
+>>>>>>> Stashed changes
 
+                    MDTopAppBar:
+                        title: "Registro de Calificaciones"
+                        elevation: 4
+                        left_action_items: [["plus", lambda x: root.ir_a_registrar()]]
+                        right_action_items: [["logout", lambda x: root.logout()]]
+
+<<<<<<< Updated upstream
                     # Espacio para tu lista o tabla de notas
                     ScrollView:
                         MDList:
                             id: lista_notas
+=======
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: ["8dp", "8dp", "8dp", "0dp"]
 
-            #  PESTAÑA 2: ESTUDIANTES 
+                        ScrollView:
+                            MDList:
+                                id: lista_notas
+>>>>>>> Stashed changes
+
             MDBottomNavigationItem:
                 name: "nav_estudiantes"
                 text: "Estudiantes"
+<<<<<<< Updated upstream
                 icon: "account-multiple"  
             
                 MDTopAppBar:
@@ -48,14 +65,25 @@
                     pos_hint: {"top": 1}
                     # Llama a la función del controlador al hacer clic
                     right_action_items: [["logout", lambda x: root.logout()]]
+=======
+                icon: "account-multiple"
+>>>>>>> Stashed changes
 
-                StudentView:
+                MDBoxLayout:
+                    orientation: 'vertical'
 
-            #  PESTAÑA 3: MATERIAS 
+                    MDTopAppBar:
+                        title: "Control de Estudiantes"
+                        elevation: 4
+                        right_action_items: [["logout", lambda x: root.logout()]]
+
+                    StudentView:
+
             MDBottomNavigationItem:
                 name: "nav_materias"
                 text: "Materias"
                 icon: "book-open-variant"
+<<<<<<< Updated upstream
             
                 MDTopAppBar:
                     title: ""
@@ -175,3 +203,15 @@
                     size_hint_x: 0.8
                     md_bg_color: 0.2, 0.6, 0.2, 1  # Verde para denotar éxito/guardado
                     on_release: root.actualizar_calificaciones()                
+=======
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+
+                    MDTopAppBar:
+                        title: "Control de Materias"
+                        elevation: 4
+                        right_action_items: [["logout", lambda x: root.logout()]]
+
+                    MateriaView:
+>>>>>>> Stashed changes

@@ -31,12 +31,13 @@ class LoginScreen(MDScreen):
             self.ids.lbl_error.text = "¡Acceso concedido!"
             #Obteniendo los datos del usuario al confirmar su entrada
             log_in_user = self.app.user.get_only_user(cls_usuario) 
-            id_user,username,admin =log_in_user[0]
             if log_in_user:
+                id_user,username,admin,id_persona =log_in_user[0]
                 self.app.sesion_usuario={
                     "id_usuario":id_user,
                     "username":username,
-                    "is_admin":admin
+                    "is_admin":admin,
+                    "id_persona":id_persona
                 }
                 print(f"Sesion iniciada Identificador:{self.app.sesion_usuario['id_usuario']} con username {self.app.sesion_usuario['username']}")
             #transicion a la pantalla notas

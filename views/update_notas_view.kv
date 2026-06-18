@@ -1,0 +1,46 @@
+<UpdateNotasScreen>:
+    name: "pantalla_detalle_nota"
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDTopAppBar:
+            title: "Editar Calificaciones"
+            elevation: 4
+            left_action_items: [["arrow-left", lambda x: root.regresar()]]
+
+        ScrollView:
+            MDBoxLayout:
+                orientation: 'vertical'
+                padding: "24dp"
+                spacing: "20dp"
+                adaptive_height: True
+
+                # Datos informativos del expediente a editar
+                MDLabel:
+                    id: lbl_alumno
+                    text: "Estudiante: "
+                    font_style: "H6"
+                    bold: True
+
+                MDLabel:
+                    id: lbl_materia
+                    text: "Materia: "
+                    font_style: "Subtitle1"
+
+                MDSeparator:
+
+                # Aquí adentro se dibujarán los TextFields con las notas que ya existen
+                MDBoxLayout:
+                    id: contenedor_edicion
+                    orientation: 'vertical'
+                    spacing: "16dp"
+                    adaptive_height: True
+
+                # Botón para confirmar los cambios
+                MDRaisedButton:
+                    text: "Guardar Cambios"
+                    pos_hint: {"center_x": .5}
+                    size_hint_x: 0.8
+                    md_bg_color: 0.2, 0.6, 0.2, 1  # Verde para denotar éxito/guardado
+                    on_release: root.actualizar_calificaciones()                

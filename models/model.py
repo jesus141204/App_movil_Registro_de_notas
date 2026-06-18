@@ -107,7 +107,7 @@ class UserModel():
         return result
 
     def get_only_user(self,user) :   
-        query_select_username=''' SELECT id,username,is_admin FROM user where username = ? '''
+        query_select_username=''' SELECT id,username,is_admin,id_persona FROM user where username = ? '''
         print("username consultado satisfactoriamente")
         result=self.__db.ejecutar_consulta(query_select_username,(user,))
         return result
@@ -122,14 +122,14 @@ class UserModel():
         password_guardada=None  
         result=self.get_password_by_username(username)
         
-        if not result:#Si el resultado esta vacio retorna falso
+        if not result:
             return False
         
         if not self.validar_estructura_password(password):
             print("Error: La contraseña no cumple con los requisitos de seguridad.")
             return False # Retornamos False para usarlo en el controlador
         
-        for passw in result:#obteniendo la clave
+        for passw in result:
             password_guardada=passw[0]
         # conviertiendo en bytes para comparar las claves
         bytes_input=password.encode('utf-8')
@@ -156,6 +156,18 @@ class UserModel():
         result=self.__db.ejecutar_consulta(delete_query,(id_user,))
         print("usuario eliminado satisfactoriamente")
         return result
+    
+    def get_datos_persona_ofuser(self, id_persona):
+        # Se Obtiene la información mediante el id_persona de la sesión 
+        query_select_persona = ''' 
+            SELECT cedula, nombre, apellido 
+            FROM persona 
+            WHERE id = ? 
+        '''
+        print(f"Buscando datos filiatorios para la Persona ID: {id_persona}")
+        result = self.__db.ejecutar_consulta(query_select_persona, (id_persona,))
+        return result
+
 
 class MateriaModel():
     def __init__(self, conexion):
@@ -253,8 +265,12 @@ class notaModel():
         return 0
 
     def consultar_notas_con_nombres(self):
+<<<<<<< Updated upstream
         """Trae las calificaciones asociando los nombres reales de estudiantes y materias"""
         # NOTA: Ajusta los nombres de las tablas/columnas ('estudiantes', 'materias', 'nombre') 
+=======
+        """Consulta las calificaciones asociando los nombres reales de estudiantes y materias"""
+>>>>>>> Stashed changes
         query = """
             SELECT p.nombre, m.name, n.nota, n.id_estudiante, n.codigo_materia 
             FROM notas n
@@ -284,11 +300,18 @@ class notaModel():
             WHERE n.id_estudiante = ? AND n.codigo_materia = ?
         """
         return self.__db.ejecutar_consulta(query, (id_estudiante, codigo_materia))
+<<<<<<< Updated upstream
     
     # Agrega esto dentro de tu clase de notas en models/model.py
+=======
+>>>>>>> Stashed changes
 
     def eliminar_nota_individual(self, id_nota):
         """Borra una única calificación de la base de datos por su ID"""
         query = "DELETE FROM notas WHERE id = ?"
+<<<<<<< Updated upstream
         self.__db.ejecutar_consulta(query, (id_nota,))
         
+=======
+        self.__db.ejecutar_consulta(query, (id_nota,))    
+>>>>>>> Stashed changes
