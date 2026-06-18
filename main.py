@@ -5,15 +5,10 @@ from kivy.core.window import Window
 # Importación de controladores
 from controller.login_controller import LoginScreen
 from controller.nota_controller import NotasScreen
-<<<<<<< Updated upstream
-from controller.detalle_nota_controller import DetalleNotaScreen
-from controller.registrar_nota_controller import RegistrarNotaScreen 
-=======
 #from controller.detalle_nota_controller import DetalleNotaScreen
 from controller.update_notas_controller import UpdateNotasScreen
 from controller.registrar_nota_controller import RegistrarNotaScreen 
 from controller.detalle_nota_controller import DetalleNotaScreen 
->>>>>>> Stashed changes
 # Nota: Como StudentView es un MDBoxLayout, asegúrate de cómo lo integras en tus pantallas
 from controller.student_controller import StudentView 
 from controller.materia_controller import MateriaView
