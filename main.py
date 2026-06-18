@@ -53,18 +53,13 @@ class LoginApp(MDApp):
         # Agregamos las pantallas principales
         sm.add_widget(LoginScreen(name="pantalla_login"))
         sm.add_widget(NotasScreen(name="pantalla_notas"))
-<<<<<<< Updated upstream
-        
         #  Agregamos las dos pantallas del nuevo flujo
         sm.add_widget(RegistrarNotaScreen(name="pantalla_registrar_nota"))
         sm.add_widget(DetalleNotaScreen(name="pantalla_detalle_nota"))
-        
-=======
         #  Agregamos las pantallas del flujo de notas
         sm.add_widget(RegistrarNotaScreen(name="pantalla_registrar_nota"))
         sm.add_widget(UpdateNotasScreen(name="pantalla_update_notas"))
         sm.add_widget(DetalleNotaScreen(name="pantalla_detalle_notas"))
->>>>>>> Stashed changes
         return sm
     
 if __name__ == '__main__':
