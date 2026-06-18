@@ -265,12 +265,7 @@ class notaModel():
         return 0
 
     def consultar_notas_con_nombres(self):
-<<<<<<< Updated upstream
-        """Trae las calificaciones asociando los nombres reales de estudiantes y materias"""
-        # NOTA: Ajusta los nombres de las tablas/columnas ('estudiantes', 'materias', 'nombre') 
-=======
         """Consulta las calificaciones asociando los nombres reales de estudiantes y materias"""
->>>>>>> Stashed changes
         query = """
             SELECT p.nombre, m.name, n.nota, n.id_estudiante, n.codigo_materia 
             FROM notas n
@@ -300,18 +295,8 @@ class notaModel():
             WHERE n.id_estudiante = ? AND n.codigo_materia = ?
         """
         return self.__db.ejecutar_consulta(query, (id_estudiante, codigo_materia))
-<<<<<<< Updated upstream
-    
-    # Agrega esto dentro de tu clase de notas en models/model.py
-=======
->>>>>>> Stashed changes
 
     def eliminar_nota_individual(self, id_nota):
         """Borra una única calificación de la base de datos por su ID"""
         query = "DELETE FROM notas WHERE id = ?"
-<<<<<<< Updated upstream
-        self.__db.ejecutar_consulta(query, (id_nota,))
-        
-=======
         self.__db.ejecutar_consulta(query, (id_nota,))    
->>>>>>> Stashed changes

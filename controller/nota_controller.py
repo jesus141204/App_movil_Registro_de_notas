@@ -1,11 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
-<<<<<<< Updated upstream
-from kivymd.uix.list import ThreeLineAvatarIconListItem, IconRightWidget, IconLeftWidget
-
-=======
 from kivymd.uix.list import ThreeLineAvatarIconListItem, IconRightWidget,IconLeftWidget
->>>>>>> Stashed changes
 class NotasScreen(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -45,11 +40,7 @@ class NotasScreen(Screen):
         for fila in notas_sueltas:
             nombre_alumno, nombre_materia, valor_nota, id_alumno, id_materia = fila
             
-<<<<<<< Updated upstream
-            # Creamos una "llave única" combinando (ID Alumno, ID Materia)
-=======
             # Creamos una llave única combinando (ID Alumno, ID Materia)
->>>>>>> Stashed changes
             expediente = (id_alumno, id_materia)
             
             # Si es la primera vez que vemos a este alumno en esta materia, le creamos su carpeta
@@ -65,19 +56,6 @@ class NotasScreen(Screen):
             # Metemos la nota actual dentro de su carpeta correspondientemente
             archivador[expediente]["lista_de_notas"].append(valor_nota)
 
-<<<<<<< Updated upstream
-        # Se construye la tarjeta de kivy
-        for expediente, info in archivador.items():
-            notas_reales = info["lista_de_notas"]
-            
-            # Convertimos los números a texto y rellenamos con "-" hasta tener 5 espacios
-            bloque_texto = [str(n) for n in notas_reales]
-            while len(bloque_texto) < 5:
-                bloque_texto.append("-")
-            
-            # Unimos las notas con barras: "15 | 18 | - | - | -"
-            notas_separadas = " | ".join(bloque_texto)
-=======
            # Se construye la tarjeta de kivy
         for expediente, info in archivador.items():
             notas_reales = info["lista_de_notas"]
@@ -86,7 +64,6 @@ class NotasScreen(Screen):
             # Notas: 16, 12
             notas_limpias = [str(int(n) if n.is_integer() else n) for n in notas_reales]
             texto_notas = ", ".join(notas_limpias)
->>>>>>> Stashed changes
             
             # Calculamos el promedio matemático real
             promedio = sum(notas_reales) / len(notas_reales) if notas_reales else 0
@@ -95,15 +72,6 @@ class NotasScreen(Screen):
             tarjeta = ThreeLineAvatarIconListItem(
                 text=info["alumno"],
                 secondary_text=f"Materia: {info['materia']}",
-<<<<<<< Updated upstream
-                tertiary_text=f"[{notas_separadas}]   •   Promedio: {promedio:.1f}",
-                on_release=lambda x, id_a=info["id_a"], id_m=info["id_m"]: self.ir_a_editar_notas(id_a, id_m)
-            )
-            
-            tarjeta.add_widget(IconLeftWidget(icon="school"))
-            
-            # Le pegamos el bote de basura a la derecha y le configuramos el truco del botón
-=======
                 tertiary_text=f"Notas:({texto_notas}) • DEF:{promedio:.1f} pts", 
                 on_release=lambda x, id_a=info["id_a"], id_m=info["id_m"]: self.ir_a_detalle_notas(id_a, id_m) 
             )
@@ -114,7 +82,6 @@ class NotasScreen(Screen):
             tarjeta.add_widget(btn_editar)
             
             #Boton derecho de eliminar todas las notas
->>>>>>> Stashed changes
             btn_borrar = IconRightWidget(icon="delete")
             btn_borrar.bind(on_release=lambda x, id_e=info["id_a"], cod_m=info["id_m"]: self.eliminar_bloque_completo(id_e, cod_m))
             tarjeta.add_widget(btn_borrar)
@@ -133,21 +100,13 @@ class NotasScreen(Screen):
             print(f"Abriendo edición para Alumno ID: {id_estudiante}, Materia Código: {codigo_materia}")
             
             # Buscamos la pantalla de destino mediante el ScreenManager
-<<<<<<< Updated upstream
-            pantalla_editar = self.manager.get_screen("pantalla_detalle_nota")
-=======
             pantalla_editar = self.manager.get_screen("pantalla_update_notas")
->>>>>>> Stashed changes
             
             # Le ordenamos que cargue los TextFields dinámicos antes de mostrarse
             pantalla_editar.cargar_datos_editar(id_estudiante, codigo_materia)
             
             # Hacemos la transición fluida hacia la izquierda
             self.manager.transition.direction = "left"
-<<<<<<< Updated upstream
-            self.manager.current = "pantalla_detalle_nota"
-            
-=======
             self.manager.current = "pantalla_update_notas"  
     
     #Ir a detalles de la notas de un estudiante
@@ -164,4 +123,3 @@ class NotasScreen(Screen):
         # Transición de cambio de pantalla fluida
         self.manager.transition.direction = "left"
         self.manager.current = "pantalla_detalle_notas"
->>>>>>> Stashed changes
